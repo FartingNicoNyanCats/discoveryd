@@ -1,0 +1,18 @@
+name: discoveryd
+version: 0.1.0
+
+authors:
+  - Luka Vandervelden <lukc@upyum.com>
+
+description: |
+  Micro-service that registers and lists other microservices.
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+
+targets:
+  discoveryd:
+    main: src/discoveryd.cr
+
+license: EUPL

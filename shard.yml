@@ -10,6 +10,8 @@ description: |
 dependencies:
   kemal:
     github: kemalcr/kemal
+  authd:
+    github: FartingNicoNyanCats/authd
 
 targets:
   discoveryd:

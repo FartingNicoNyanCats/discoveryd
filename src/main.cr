@@ -79,6 +79,9 @@ Kemal.config.extra_options do |parser|
 	parser.on "-a URL", "--authd URL", "URL of authd" do |url|
 		authd_url = url
 	end
+	parser.on "-K file", "--key-file file", "JWT key file" do |file|
+		authd_jwt_key = File.read(file).gsub /\n$/, ""
+	end
 end
 
 add_handler AuthD::Middleware.new &.key = authd_jwt_key

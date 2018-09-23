@@ -83,5 +83,5 @@ end
 
 add_handler AuthD::Middleware.new &.key = authd_jwt_key
 
-Kemal.run 12050
+Kemal.run
 

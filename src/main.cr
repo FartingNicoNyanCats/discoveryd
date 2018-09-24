@@ -80,7 +80,7 @@ Kemal.config.extra_options do |parser|
 		authd_url = url
 	end
 	parser.on "-K file", "--key-file file", "JWT key file" do |file|
-		authd_jwt_key = File.read(file).gsub /\n$/, ""
+		authd_jwt_key = File.read(file).chomp
 	end
 end
 

@@ -10,9 +10,11 @@ description: |
 dependencies:
   kemal:
     github: kemalcr/kemal
+  authd:
+    github: FartingNicoNyanCats/authd
 
 targets:
   discoveryd:
-    main: src/discoveryd.cr
+    main: src/main.cr
 
 license: EUPL

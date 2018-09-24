@@ -1,8 +1,10 @@
 
 require "kemal"
 require "json"
+require "authd"
 
 authd_url = "http://localhost:7777"
+authd_jwt_key = "nico-nico-nii"
 
 class Error
 	def initialize(reason : String)
@@ -44,7 +46,11 @@ get "/services" do |env|
 end
 
 post "/services" do |env|
-	# FIXME: check permissions.
+	# FIXME: Check user is in a specific group.
+	unless env.authd_user
+		halt env, status_code: 403, response: Error.new("No authd token provided through X-Token.").to_json
+	end
+
 	name = env.params.json["name"]?
 	url = env.params.json["url"]?
 
@@ -73,7 +79,12 @@ Kemal.config.extra_options do |parser|
 	parser.on "-a URL", "--authd URL", "URL of authd" do |url|
 		authd_url = url
 	end
+	parser.on "-K file", "--key-file file", "JWT key file" do |file|
+		authd_jwt_key = File.read(file).chomp
+	end
 end
 
-Kemal.run 12050
+add_handler AuthD::Middleware.new &.key = authd_jwt_key
+
+Kemal.run
 
